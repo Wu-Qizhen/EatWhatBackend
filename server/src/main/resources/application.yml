@@ -1,0 +1,65 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    #druid:
+    driver-class-name: ${eatwhat.datasource.driver-class-name}
+    url: jdbc:mysql://${eatwhat.datasource.host}:${eatwhat.datasource.port}/${eatwhat.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${eatwhat.datasource.username}
+    password: ${eatwhat.datasource.password}
+  data:
+    redis:
+      host: ${eatwhat.redis.host}
+      port: ${eatwhat.redis.port}
+      password: ${eatwhat.redis.password}
+      database: ${eatwhat.redis.database}
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.eatwhat.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      eatwhat:
+        mapper: debug
+        service: info
+        controller: info
+
+eatwhat:
+  jwt:
+    #签名加密时使用的秘钥
+    admin-secret-key: eatwhat
+    #过期时间
+    admin-ttl: 7200000
+    #前端传递过来的令牌名称
+    admin-token-name: token
+    user-secret-key: eatwhat
+    user-ttl: 7200000
+    user-token-name: authentication
+  qiniuoss:
+    access-key: ${eatwhat.qiniuoss.access-key}
+    secret-key: ${eatwhat.qiniuoss.secret-key}
+    bucket: ${eatwhat.qiniuoss.bucket}
+  wechat:
+    appid: ${wechat.appid}
+    secret: ${wechat.secret}
+    mchid: ${eatwhat.wechat.mchid}
+    mchSerialNo: ${eatwhat.wechat.mchSerialNo}
+    privateKeyFilePath: ${eatwhat.wechat.privateKeyFilePath}
+    apiV3Key: ${eatwhat.wechat.apiV3Key}
+    weChatPayCertFilePath: ${eatwhat.wechat.weChatPayCertFilePath}
+    notifyUrl: ${eatwhat.wechat.notifyUrl}
+    refundNotifyUrl: ${eatwhat.wechat.refundNotifyUrl}
+  shop:
+    address: ${eatwhat.shop.address}
+  baidu:
+    ak: ${eatwhat.baidu.ak}
